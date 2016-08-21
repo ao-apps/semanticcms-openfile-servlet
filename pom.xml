@@ -39,15 +39,6 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 	<url>https://semanticcms.com/docs/semanticcms-openfile-servlet/</url>
 	<description>SemanticCMS desktop integration mode for local content creation in a Servlet environment.</description>
 
-	<developers>
-		<developer>
-			<name>AO Industries, Inc.</name>
-			<email>support@aoindustries.com</email>
-			<organization>AO Industries, Inc.</organization>
-			<organizationUrl>https://www.aoindustries.com/</organizationUrl>
-		</developer>
-	</developers>
-
 	<scm>
 		<connection>scm:git:git://github.com/aoindustries/semanticcms-openfile-servlet.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/semanticcms-openfile-servlet.git</developerConnection>
