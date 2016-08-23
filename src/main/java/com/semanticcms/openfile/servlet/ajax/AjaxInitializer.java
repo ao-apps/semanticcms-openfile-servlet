@@ -1,0 +1,44 @@
+/*
+ * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
+ * Copyright (C) 2016  AO Industries, Inc.
+ *     support@aoindustries.com
+ *     7262 Bull Pen Cir
+ *     Mobile, AL 36695
+ *
+ * This file is part of semanticcms-openfile-servlet.
+ *
+ * semanticcms-openfile-servlet is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * semanticcms-openfile-servlet is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package com.semanticcms.openfile.servlet.ajax;
+
+import com.semanticcms.core.servlet.SemanticCMS;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
+
+@WebListener("Registers the \"" + AjaxInitializer.HEAD_INCLUDE + "\" head include in SemanticCMS.")
+public class AjaxInitializer implements ServletContextListener {
+
+	static final String HEAD_INCLUDE = "/semanticcms-openfile-servlet/head.inc.jspx";
+
+	@Override
+	public void contextInitialized(ServletContextEvent event) {
+		SemanticCMS.getInstance(event.getServletContext()).addHeadInclude(HEAD_INCLUDE);
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent event) {
+		// Do nothing
+	}
+}
