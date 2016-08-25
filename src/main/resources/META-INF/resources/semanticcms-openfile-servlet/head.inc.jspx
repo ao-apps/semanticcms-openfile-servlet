@@ -29,8 +29,8 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 	<jsp:directive.page language="java" buffer="512kb" autoFlush="true" pageEncoding="UTF-8" session="false" />
 	<c:if test="${!requestScope['/semanticcms-openfile-servlet/head.inc.jspx/included']}">
 		<c:set scope="request" var="/semanticcms-openfile-servlet/head.inc.jspx/included" value="true" />
-		<ao:script src="/semanticcms-openfile-servlet/scripts.js" />
 		<c:if test="${!header['X-com-aoindustries-web-page-exporting']}">
+			<ao:script src="/semanticcms-openfile-servlet/scripts.js" />
 			<ao:script>
 				semanticcms_openfile_servlet.openFileUrl = <ao:out value="${ao:encodeURL(pageContext.request.contextPath.concat('/semanticcms-openfile-servlet/ajax/open-file'))}" />;
 			</ao:script>
