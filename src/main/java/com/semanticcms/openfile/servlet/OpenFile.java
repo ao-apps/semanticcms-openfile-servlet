@@ -96,7 +96,8 @@ final public class OpenFile {
 		String[] getCommand(java.io.File resourceFile) throws IOException;
 	}
 
-	private static final Object fileOpenersLock = new Object();
+	private static class FileOpenersLock {}
+	private static final FileOpenersLock fileOpenersLock = new FileOpenersLock();
 
 	/**
 	 * Registers a file opener.
