@@ -32,7 +32,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 
 	<groupId>com.semanticcms</groupId>
 	<artifactId>semanticcms-openfile-servlet</artifactId>
-	<version>1.5-SNAPSHOT</version>
+	<version>1.5.0</version>
 	<packaging>jar</packaging>
 
 	<name>SemanticCMS OpenFile Servlet</name>
@@ -44,7 +44,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		<connection>scm:git:git://github.com/aoindustries/semanticcms-openfile-servlet.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/semanticcms-openfile-servlet.git</developerConnection>
 		<url>http://github.com/aoindustries/semanticcms-openfile-servlet</url>
-		<tag>HEAD</tag>
+		<tag>semanticcms-openfile-servlet-1.5.0</tag>
 	</scm>
 
 	<profiles>
