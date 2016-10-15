@@ -4,7 +4,7 @@
 ## Project Links
 * [Project Home](https://semanticcms.com/openfile/servlet/)
 * [API Docs](https://semanticcms.com/openfile/servlet/apidocs/)
-* [Maven Central Repository](http://search.maven.org/#search|gav|1|g:%22com.semanticcms%22%20AND%20a:%22semanticcms-openfile-servlet%22)
+* [Maven Central Repository](https://search.maven.org/#search|gav|1|g:%22com.semanticcms%22%20AND%20a:%22semanticcms-openfile-servlet%22)
 * [GitHub](https://github.com/aoindustries/semanticcms-openfile-servlet)
 
 ## Contact Us
