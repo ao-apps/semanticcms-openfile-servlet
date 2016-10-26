@@ -59,7 +59,7 @@ public class OpenFileServlet extends HttpServlet {
 				request.getParameter("path")
 			);
 			// Write output
-			response.reset();
+			response.resetBuffer();
 			response.setContentType("application/xml");
 			PrintWriter out = response.getWriter();
 			out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>");
