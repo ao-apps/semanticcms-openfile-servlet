@@ -1,6 +1,6 @@
 /*
  * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -194,6 +194,7 @@ final public class OpenFile {
 						};
 					} else if(
 						"doc".equals(extension)
+						|| "docx".equals(extension)
 						|| "odt".equals(extension)
 					) {
 						command = new String[] {

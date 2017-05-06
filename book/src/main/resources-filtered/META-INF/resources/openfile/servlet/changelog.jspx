@@ -1,6 +1,6 @@
 <!--
 semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
-Copyright (C) 2016  AO Industries, Inc.
+Copyright (C) 2016, 2017  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -36,7 +36,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-31T01:27:36-0500"
-		dateModified="2016-11-16T03:19:38-0600"
+		dateModified="2017-05-06T16:31:38-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-openfile-servlet:pom.version}" />
@@ -51,7 +51,11 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 				groupId="@{documented.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{documented.scm.url}"
-			/>
+			>
+				<ul>
+					<li>Added <code>docx</code> extension.</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release
