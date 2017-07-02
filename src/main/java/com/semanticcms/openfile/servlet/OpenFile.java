@@ -234,7 +234,9 @@ final public class OpenFile {
 						//	resourceFile.getCanonicalPath()
 						//};
 					} else if(
-						"java".equals(extension)
+						"c".equals(extension)
+						|| "h".equals(extension)
+						|| "java".equals(extension)
 						|| "jsp".equals(extension)
 						|| "jspx".equals(extension)
 						|| "sh".equals(extension)
