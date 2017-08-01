@@ -24,7 +24,9 @@ package com.semanticcms.openfile.servlet;
 
 import com.aoindustries.io.FileUtils;
 import com.aoindustries.lang.ProcessResult;
+import com.semanticcms.core.model.PageRef;
 import com.semanticcms.core.servlet.PageRefResolver;
+import com.semanticcms.core.servlet.SemanticCMS;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -143,6 +145,7 @@ final public class OpenFile {
 		ServletContext servletContext,
 		HttpServletRequest request,
 		HttpServletResponse response,
+		String domain,
 		String book,
 		final String path
 	) throws ServletException, IOException, SkipPageException {
@@ -152,7 +155,12 @@ final public class OpenFile {
 			throw new SkipPageException();
 		} else {
 			String[] command;
-			java.io.File resourceFile = PageRefResolver.getPageRef(servletContext, request, book, path).getResourceFile(true, true);
+			PageRef pageRef = PageRefResolver.getPageRef(servletContext, request, domain, book, path);
+			java.io.File resourceFile =
+				SemanticCMS.getInstance(servletContext)
+				.getBook(pageRef.getBookRef())
+				.getSourceFile(pageRef.getPath(), true, true)
+			;
 			if(resourceFile.isDirectory()) {
 				command = new String[] {
 					// TODO: What is good windows path?

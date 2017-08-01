@@ -1,6 +1,6 @@
 /*
  * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
- * Copyright (C) 2013, 2014, 2016  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2016, 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -38,8 +38,9 @@ import javax.servlet.jsp.SkipPageException;
  * This is to be called by the JavaScript function openFile.
  *
  * Request parameters:
- *   book  The name of the book of the file to open
- *   path  The book-relative path of the file to open
+ *   domain  The domain of the book of the file to open
+ *   book    The name of the book of the file to open
+ *   path    The book-relative path of the file to open
  */
 @WebServlet(OpenFileServlet.SERVLET_PATH)
 public class OpenFileServlet extends HttpServlet {
@@ -55,6 +56,7 @@ public class OpenFileServlet extends HttpServlet {
 				getServletContext(),
 				request,
 				response,
+				request.getParameter("domain"),
 				request.getParameter("book"),
 				request.getParameter("path")
 			);

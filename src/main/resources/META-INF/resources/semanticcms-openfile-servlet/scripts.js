@@ -1,6 +1,6 @@
 /*
  * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
- * Copyright (C) 2013, 2014, 2016  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2016, 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -48,7 +48,7 @@ semanticcms_openfile_servlet = {
 	 * Opens a file from the server, passing-in the full path to the file.
 	 * This is to be used in a trusted environment only.
 	 */
-	openFile : function(book, path) {
+	openFile : function(domain, book, path) {
 		// window.alert("path="+path);
 		$.ajax({
 			cache : false,
@@ -56,6 +56,7 @@ semanticcms_openfile_servlet = {
 			timeout : 60000,
 			url : semanticcms_openfile_servlet.openFileUrl,
 			data : {
+				domain : domain,
 				book : book,
 				path : path
 			},
@@ -66,6 +67,7 @@ semanticcms_openfile_servlet = {
 			error : function(jqXHR, textStatus, errorThrown) {
 				semanticcms_openfile_servlet.handleAjaxError(
 					"Unable to open file:\n"
+					+ "domain = " + domain + "\n"
 					+ "book = " + book + "\n"
 					+ "path = " + path,
 					jqXHR,

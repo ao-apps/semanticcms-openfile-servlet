@@ -37,7 +37,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-31T01:27:36-0500"
-		dateModified="2017-08-01T16:59:52-0500"
+		dateModified="2017-08-01T17:55:30-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-openfile-servlet:pom.version}" />
@@ -52,7 +52,12 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 				groupId="@{documented.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{documented.scm.url}"
-			/>
+			>
+				<ul>
+					<li>Updated for <core:link book="/" page="/index.jspx" /> 2 compatibility.</li>
+					<li>Added <core:link book="/" page="/index.jspx" /> domain support.</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release
