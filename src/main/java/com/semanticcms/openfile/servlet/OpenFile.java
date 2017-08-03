@@ -24,9 +24,13 @@ package com.semanticcms.openfile.servlet;
 
 import com.aoindustries.io.FileUtils;
 import com.aoindustries.lang.ProcessResult;
-import com.semanticcms.core.model.PageRef;
-import com.semanticcms.core.servlet.PageRefResolver;
+import com.semanticcms.core.model.Resource;
+import com.semanticcms.core.model.ResourceRef;
+import com.semanticcms.core.model.ResourceStore;
+import com.semanticcms.core.repository.Book;
+import com.semanticcms.core.servlet.ResourceRefResolver;
 import com.semanticcms.core.servlet.SemanticCMS;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -155,12 +159,14 @@ final public class OpenFile {
 			throw new SkipPageException();
 		} else {
 			String[] command;
-			PageRef pageRef = PageRefResolver.getPageRef(servletContext, request, domain, book, path);
-			java.io.File resourceFile =
-				SemanticCMS.getInstance(servletContext)
-				.getBook(pageRef.getBookRef())
-				.getSourceFile(pageRef.getPath(), true, true)
-			;
+			ResourceRef resourceRef = ResourceRefResolver.getResourceRef(servletContext, request, domain, book, path);
+			Book bookObj = SemanticCMS.getInstance(servletContext).getBook(resourceRef.getBookRef());
+			if(bookObj.isAccessible()) throw new FileNotFoundException("Book is inaccessible: " + resourceRef);
+			ResourceStore resourceStore = bookObj.getResourceStore();
+			if(resourceStore == null) throw new FileNotFoundException("Resource store is unavailable: " + resourceRef);
+			Resource resource = resourceStore.getResource(resourceRef);
+			java.io.File resourceFile = resource.getFile();
+			if(resourceFile == null) throw new FileNotFoundException("Resource is not a local file: " + resourceRef);
 			if(resourceFile.isDirectory()) {
 				command = new String[] {
 					// TODO: What is good windows path?
