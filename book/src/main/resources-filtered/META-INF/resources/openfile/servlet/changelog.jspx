@@ -37,7 +37,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-31T01:27:36-0500"
-		dateModified="2017-08-01T17:55:30-0500"
+		dateModified="2017-08-03T11:05:22-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-openfile-servlet:pom.version}" />
@@ -164,7 +164,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 				<li>No longer including scripts.js during export.</li>
 				<li>Removed unnecessary "included" check.</li>
 				<li>
-					Using <ao:a href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</ao:a>
+					Using <ao:a rel="nofollow" href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</ao:a>
 					function <core:link book="/core/taglib" page="/semanticcms-core.tld/function-isExporting" />
 					instead of direct access to header.
 				</li>
