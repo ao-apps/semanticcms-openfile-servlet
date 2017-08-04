@@ -24,7 +24,6 @@ package com.semanticcms.openfile.servlet;
 
 import com.aoindustries.io.FileUtils;
 import com.aoindustries.lang.ProcessResult;
-import com.semanticcms.core.model.Resource;
 import com.semanticcms.core.model.ResourceRef;
 import com.semanticcms.core.model.ResourceStore;
 import com.semanticcms.core.repository.Book;
@@ -164,8 +163,7 @@ final public class OpenFile {
 			if(bookObj.isAccessible()) throw new FileNotFoundException("Book is inaccessible: " + resourceRef);
 			ResourceStore resourceStore = bookObj.getResourceStore();
 			if(resourceStore == null) throw new FileNotFoundException("Resource store is unavailable: " + resourceRef);
-			Resource resource = resourceStore.getResource(resourceRef);
-			java.io.File resourceFile = resource.getFile();
+			java.io.File resourceFile = resourceStore.getResource(resourceRef.getPath()).getFile();
 			if(resourceFile == null) throw new FileNotFoundException("Resource is not a local file: " + resourceRef);
 			if(resourceFile.isDirectory()) {
 				command = new String[] {
