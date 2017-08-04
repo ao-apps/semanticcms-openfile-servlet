@@ -25,7 +25,7 @@ package com.semanticcms.openfile.servlet;
 import com.aoindustries.io.FileUtils;
 import com.aoindustries.lang.ProcessResult;
 import com.semanticcms.core.model.ResourceRef;
-import com.semanticcms.core.model.ResourceStore;
+import com.semanticcms.core.resources.ResourceStore;
 import com.semanticcms.core.repository.Book;
 import com.semanticcms.core.servlet.ResourceRefResolver;
 import com.semanticcms.core.servlet.SemanticCMS;
