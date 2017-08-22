@@ -24,9 +24,10 @@ package com.semanticcms.openfile.servlet;
 
 import com.aoindustries.io.FileUtils;
 import com.aoindustries.lang.ProcessResult;
+import com.aoindustries.net.Path;
 import com.semanticcms.core.model.ResourceRef;
-import com.semanticcms.core.pages.Book;
 import com.semanticcms.core.resources.ResourceStore;
+import com.semanticcms.core.servlet.Book;
 import com.semanticcms.core.servlet.ResourceRefResolver;
 import com.semanticcms.core.servlet.SemanticCMS;
 import java.io.FileNotFoundException;
@@ -149,8 +150,8 @@ final public class OpenFile {
 		HttpServletRequest request,
 		HttpServletResponse response,
 		String domain,
-		String book,
-		final String path
+		Path book,
+		final Path path
 	) throws ServletException, IOException, SkipPageException {
 		// Only allow from localhost and when open enabled
 		if(!isAllowed(servletContext, request)) {
@@ -158,10 +159,10 @@ final public class OpenFile {
 			throw new SkipPageException();
 		} else {
 			String[] command;
-			ResourceRef resourceRef = ResourceRefResolver.getResourceRef(servletContext, request, domain, book, path);
+			ResourceRef resourceRef = ResourceRefResolver.getResourceRef(servletContext, request, domain, book, path.toString());
 			Book bookObj = SemanticCMS.getInstance(servletContext).getBook(resourceRef.getBookRef());
 			if(bookObj.isAccessible()) throw new FileNotFoundException("Book is inaccessible: " + resourceRef);
-			ResourceStore resourceStore = bookObj.getResourceStore();
+			ResourceStore resourceStore = bookObj.getResources();
 			if(resourceStore == null) throw new FileNotFoundException("Resource store is unavailable: " + resourceRef);
 			java.io.File resourceFile = resourceStore.getResource(resourceRef.getPath()).getFile();
 			if(resourceFile == null) throw new FileNotFoundException("Resource is not a local file: " + resourceRef);

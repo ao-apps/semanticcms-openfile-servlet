@@ -22,6 +22,8 @@
  */
 package com.semanticcms.openfile.servlet.ajax;
 
+import com.aoindustries.net.Path;
+import com.aoindustries.validation.ValidationException;
 import com.semanticcms.openfile.servlet.OpenFile;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -57,8 +59,8 @@ public class OpenFileServlet extends HttpServlet {
 				request,
 				response,
 				request.getParameter("domain"),
-				request.getParameter("book"),
-				request.getParameter("path")
+				Path.valueOf(request.getParameter("book")),
+				Path.valueOf(request.getParameter("path"))
 			);
 			// Write output
 			response.resetBuffer();
@@ -66,6 +68,8 @@ public class OpenFileServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>");
 			out.println("<success>true</success>");
+		} catch(ValidationException e) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 		} catch(SkipPageException e) {
 			// Nothing to do
 		}
