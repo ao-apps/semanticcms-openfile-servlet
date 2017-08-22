@@ -165,7 +165,7 @@ final public class OpenFile {
 			Book bookObj = SemanticCMS.getInstance(servletContext).getBook(resourceRef.getBookRef());
 			if(bookObj.isAccessible()) throw new FileNotFoundException("Book is inaccessible: " + resourceRef);
 			ResourceStore resourceStore = bookObj.getResources();
-			if(resourceStore == null) throw new FileNotFoundException("Resource store is unavailable: " + resourceRef);
+			if(!resourceStore.isAvailable()) throw new FileNotFoundException("Resource store is unavailable: " + resourceRef);
 			java.io.File resourceFile = resourceStore.getResource(resourceRef.getPath()).getFile();
 			if(resourceFile == null) throw new FileNotFoundException("Resource is not a local file: " + resourceRef);
 			if(resourceFile.isDirectory()) {
