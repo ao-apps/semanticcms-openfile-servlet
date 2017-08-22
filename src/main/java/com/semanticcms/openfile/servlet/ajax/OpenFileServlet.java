@@ -22,6 +22,7 @@
  */
 package com.semanticcms.openfile.servlet.ajax;
 
+import com.aoindustries.net.DomainName;
 import com.aoindustries.net.Path;
 import com.aoindustries.validation.ValidationException;
 import com.semanticcms.openfile.servlet.OpenFile;
@@ -58,7 +59,7 @@ public class OpenFileServlet extends HttpServlet {
 				getServletContext(),
 				request,
 				response,
-				request.getParameter("domain"),
+				DomainName.valueOf(request.getParameter("domain")),
 				Path.valueOf(request.getParameter("book")),
 				Path.valueOf(request.getParameter("path"))
 			);

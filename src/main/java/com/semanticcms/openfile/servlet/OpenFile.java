@@ -24,6 +24,7 @@ package com.semanticcms.openfile.servlet;
 
 import com.aoindustries.io.FileUtils;
 import com.aoindustries.lang.ProcessResult;
+import com.aoindustries.net.DomainName;
 import com.aoindustries.net.Path;
 import com.semanticcms.core.model.ResourceRef;
 import com.semanticcms.core.resources.ResourceStore;
@@ -145,11 +146,12 @@ final public class OpenFile {
 		}
 	}
 
+	// TODO: Should this only allow open of published books?
 	public static void openFile(
 		ServletContext servletContext,
 		HttpServletRequest request,
 		HttpServletResponse response,
-		String domain,
+		DomainName domain,
 		Path book,
 		final Path path
 	) throws ServletException, IOException, SkipPageException {
