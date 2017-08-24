@@ -26,6 +26,7 @@ import com.aoindustries.io.FileUtils;
 import com.aoindustries.lang.ProcessResult;
 import com.aoindustries.net.DomainName;
 import com.aoindustries.net.Path;
+import com.aoindustries.servlet.http.ServletUtil;
 import com.semanticcms.core.model.ResourceRef;
 import com.semanticcms.core.resources.ResourceStore;
 import com.semanticcms.core.servlet.Book;
@@ -158,7 +159,7 @@ final public class OpenFile {
 		// Only allow from localhost and when open enabled
 		if(!isAllowed(servletContext, request)) {
 			response.sendError(HttpServletResponse.SC_FORBIDDEN);
-			throw new SkipPageException();
+			throw ServletUtil.SKIP_PAGE_EXCEPTION;
 		} else {
 			String[] command;
 			ResourceRef resourceRef = ResourceRefResolver.getResourceRef(servletContext, request, domain, book, path.toString());
