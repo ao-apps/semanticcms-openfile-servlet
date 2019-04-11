@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
-Copyright (C) 2016, 2017  AO Industries, Inc.
+Copyright (C) 2016, 2017, 2018  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -37,7 +37,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-31T01:27:36-0500"
-		dateModified="2017-07-20T13:56:04-0500"
+		dateModified="2018-04-28T02:42:40-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-openfile-servlet:pom.version}" />
@@ -52,7 +52,11 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 				groupId="@{documented.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{documented.scm.url}"
-			/>
+			>
+				<ul>
+					<li>Added <code>csh</code> extension to open in NetBeans.</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release
@@ -158,7 +162,11 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 				<li>Added headInclude registry.</li>
 				<li>No longer including scripts.js during export.</li>
 				<li>Removed unnecessary "included" check.</li>
-				<li>Using EL function isExporting() instead of direct access to header.</li>
+				<li>
+					Using <ao:a rel="nofollow" href="https://docs.oracle.com/cd/E19226-01/820-7627/gjddd/">Expression Language</ao:a>
+					function <core:link book="/core/taglib" page="/semanticcms-core.tld/function-isExporting" />
+					instead of direct access to header.
+				</li>
 				<li>Added global and per-view script registry.</li>
 			</ul>
 		</changelog:release>
