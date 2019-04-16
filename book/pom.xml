@@ -37,7 +37,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		<documented.groupId>com.semanticcms</documented.groupId><documented.artifactId>semanticcms-openfile-servlet</documented.artifactId>
 		<documented.javaVersion>1.7</documented.javaVersion>
 		<documented.javac.link.javaApi>${javac.link.javaApi.jdk7}</documented.javac.link.javaApi>
-		<documented.name>SemanticCMS 1 OpenFile Servlet</documented.name>
+		<documented.name>SemanticCMS OpenFile Servlet</documented.name>
 		<documented.shortTitle>Servlet</documented.shortTitle>
 		<documented.url>https://semanticcms.com/openfile/servlet/</documented.url>
 		<documented.description>SemanticCMS desktop integration mode for local content creation in a Servlet environment.</documented.description>

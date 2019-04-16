@@ -40,7 +40,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		<description.html><![CDATA[<a target="_top" href="https://semanticcms.com/">SemanticCMS</a> desktop integration mode for local content creation in a Servlet environment.]]></description.html>
 	</properties>
 
-	<name>SemanticCMS 1 OpenFile Servlet</name>
+	<name>SemanticCMS OpenFile Servlet</name>
 	<url>https://semanticcms.com/openfile/servlet/</url>
 	<description>SemanticCMS desktop integration mode for local content creation in a Servlet environment.</description>
 	<inceptionYear>2013</inceptionYear>
