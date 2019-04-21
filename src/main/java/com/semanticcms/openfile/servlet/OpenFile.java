@@ -1,6 +1,6 @@
 /*
  * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -117,7 +117,7 @@ final public class OpenFile {
 			@SuppressWarnings("unchecked")
 			Map<String,FileOpener> fileOpeners = (Map<String,FileOpener>)servletContext.getAttribute(FILE_OPENERS_REQUEST_ATTRIBUTE_NAME);
 			if(fileOpeners == null) {
-				fileOpeners = new HashMap<String,FileOpener>();
+				fileOpeners = new HashMap<>();
 				servletContext.setAttribute(FILE_OPENERS_REQUEST_ATTRIBUTE_NAME, fileOpeners);
 			}
 			for(String extension : extensions) {
@@ -161,7 +161,7 @@ final public class OpenFile {
 			response.sendError(HttpServletResponse.SC_FORBIDDEN);
 			throw ServletUtil.SKIP_PAGE_EXCEPTION;
 		} else {
-			String[] command;
+			final String[] command;
 			ResourceRef resourceRef = ResourceRefResolver.getResourceRef(servletContext, request, domain, book, path.toString());
 			Book bookObj = SemanticCMS.getInstance(servletContext).getBook(resourceRef.getBookRef());
 			if(bookObj.isAccessible()) throw new FileNotFoundException("Book is inaccessible: " + resourceRef);
@@ -195,121 +195,106 @@ final public class OpenFile {
 					command = fileOpener.getCommand(resourceFile);
 				} else {
 					// Use default behavior
-					// Java 1.7: switch(extension)
-					if(
-						"gif".equals(extension)
-						|| "jpg".equals(extension)
-						|| "jpeg".equals(extension)
-						|| "png".equals(extension)
-					) {
-						command = new String[] {
-							isWindows()
-								? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
-								: "/usr/bin/gwenview",
-							resourceFile.getCanonicalPath()
-						};
-					} else if(
-						"doc".equals(extension)
-						|| "docx".equals(extension)
-						|| "odt".equals(extension)
-					) {
-						command = new String[] {
-							isWindows()
-								? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
-								: "/usr/bin/libreoffice",
-							"--writer",
-							resourceFile.getCanonicalPath()
-						};
-					} else if(
-						"csv".equals(extension)
-						|| "ods".equals(extension)
-						|| "sxc".equals(extension)
-						|| "xls".equals(extension)
-					) {
-						command = new String[] {
-							isWindows()
-								? "C:\\Program Files (x86)\\OpenOffice 4\\program\\scalc.exe"
-								: "/usr/bin/libreoffice",
-							"--calc",
-							resourceFile.getCanonicalPath()
-						};
-					} else if(
-						"pdf".equals(extension)
-					) {
-						command = new String[] {
-							isWindows()
-								? "C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe"
-								: "/usr/bin/okular",
-							resourceFile.getCanonicalPath()
-						};
-					//} else if(
-					//	"sh".equals(extension)
-					//) {
-						//command = new String[] {
-						//	"/usr/bin/kwrite",
-						//	resourceFile.getCanonicalPath()
-						//};
-					} else if(
-						"c".equals(extension)
-						|| "csh".equals(extension)
-						|| "h".equals(extension)
-						|| "java".equals(extension)
-						|| "jsp".equals(extension)
-						|| "jspx".equals(extension)
-						|| "sh".equals(extension)
-						|| "txt".equals(extension)
-						|| "xml".equals(extension)
-					) {
-						if(isWindows()) {
+					switch(extension) {
+						case "gif" :
+						case "jpg" :
+						case "jpeg" :
+						case "png" :
 							command = new String[] {
-								"C:\\Program Files\\NetBeans 7.4\\bin\\netbeans64.exe",
-								"--open",
+								isWindows()
+									? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
+									: "/usr/bin/gwenview",
 								resourceFile.getCanonicalPath()
 							};
-						} else {
+							break;
+						case "doc" :
+						case "docx" :
+						case "odt" :
 							command = new String[] {
-								//"/usr/bin/kwrite",
-								"/opt/netbeans-8.0.2/bin/netbeans",
-								"--jdkhome",
-								getJdkPath(),
-								"--open",
+								isWindows()
+									? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
+									: "/usr/bin/libreoffice",
+								"--writer",
 								resourceFile.getCanonicalPath()
 							};
-						}
-					} else if(
-						"dia".equals(extension)
-					) {
-						command = new String[] {
-							isWindows()
-								? "C:\\Program Files (x86)\\Dia\\bin\\diaw.exe"
-								: "/usr/bin/dia",
-							resourceFile.getCanonicalPath()
-						};
-					} else if(
-						"zip".equals(extension)
-					) {
-						if(isWindows()) {
+							break;
+						case "csv" :
+						case "ods" :
+						case "sxc" :
+						case "xls" :
 							command = new String[] {
+								isWindows()
+									? "C:\\Program Files (x86)\\OpenOffice 4\\program\\scalc.exe"
+									: "/usr/bin/libreoffice",
+								"--calc",
 								resourceFile.getCanonicalPath()
 							};
-						} else {
+							break;
+						case "pdf" :
 							command = new String[] {
-								"/usr/bin/konqueror",
+								isWindows()
+									? "C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe"
+									: "/usr/bin/okular",
 								resourceFile.getCanonicalPath()
 							};
-						}
-					} else if(
-						"mp3".equals(extension)
-						|| "wma".equals(extension)
-					) {
-						command = new String[] {
-							isWindows()
-								? "C:\\Program Files\\VideoLAN\\VLC.exe"
-								: "/usr/bin/vlc",
-							resourceFile.getCanonicalPath()
-						};
-					} else {
-						throw new IllegalArgumentException("Unsupprted file type by extension: " + extension);
+							break;
+						case "c" :
+						case "csh" :
+						case "h" :
+						case "java" :
+						case "jsp" :
+						case "jspx" :
+						case "sh" :
+						case "txt" :
+						case "xml" :
+							if(isWindows()) {
+								command = new String[] {
+									"C:\\Program Files\\NetBeans 7.4\\bin\\netbeans64.exe",
+									"--open",
+									resourceFile.getCanonicalPath()
+								};
+							} else {
+								command = new String[] {
+									//"/usr/bin/kwrite",
+									"/opt/netbeans-8.0.2/bin/netbeans",
+									"--jdkhome",
+									getJdkPath(),
+									"--open",
+									resourceFile.getCanonicalPath()
+								};
+							}
+							break;
+						case "dia" :
+							command = new String[] {
+								isWindows()
+									? "C:\\Program Files (x86)\\Dia\\bin\\diaw.exe"
+									: "/usr/bin/dia",
+								resourceFile.getCanonicalPath()
+							};
+							break;
+						case "zip" :
+							if(isWindows()) {
+								command = new String[] {
+									resourceFile.getCanonicalPath()
+								};
+							} else {
+								command = new String[] {
+									"/usr/bin/konqueror",
+									resourceFile.getCanonicalPath()
+								};
+							}
+							break;
+						case "mp3" :
+						case "wma" :
+							command = new String[] {
+								isWindows()
+									? "C:\\Program Files\\VideoLAN\\VLC.exe"
+									: "/usr/bin/vlc",
+								resourceFile.getCanonicalPath()
+							};
+							break;
+						default :
+							throw new IllegalArgumentException("Unsupprted file type by extension: " + extension);
 					}
 				}
 			}

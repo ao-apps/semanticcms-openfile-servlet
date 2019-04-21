@@ -37,7 +37,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-31T01:27:36-0500"
-		dateModified="2018-04-28T02:42:40-0500"
+		dateModified="2019-04-20T22:46:56-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-openfile-servlet:pom.version}" />
@@ -54,6 +54,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 				scmUrl="@{documented.scm.url}"
 			>
 				<ul>
+					<li>Minimum Java version changed from 1.6 to 1.7.</li>
 					<li>Updated for <core:link book="/" page="/" /> 2 compatibility.</li>
 					<li>Added <core:link book="/core/model" page="/" /> domain support.</li>
 					<li>Added <core:link book="/core/resources" page="/" /> support.</li>
