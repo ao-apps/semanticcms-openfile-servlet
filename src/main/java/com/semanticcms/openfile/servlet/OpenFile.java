@@ -256,7 +256,7 @@ final public class OpenFile {
 							} else {
 								command = new String[] {
 									//"/usr/bin/kwrite",
-									"/opt/netbeans-8.0.2/bin/netbeans",
+									"/opt/netbeans/bin/netbeans",
 									"--jdkhome",
 									getJdkPath(),
 									"--open",
