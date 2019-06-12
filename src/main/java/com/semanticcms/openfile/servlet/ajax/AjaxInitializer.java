@@ -35,8 +35,7 @@ public class AjaxInitializer implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		SemanticCMS semanticCMS = SemanticCMS.getInstance(event.getServletContext());
-		// TODO: Get version from MavenProperties, other places, too (even inside jsps)
-		semanticCMS.addScript("jquery", "/webjars/jquery/3.4.1/jquery.min.js");
+		semanticCMS.addScript("jquery", "/webjars/jquery/" + Maven.properties.getProperty("jquery.version") + "/jquery.min.js");
 		semanticCMS.addHeadInclude(HEAD_INCLUDE);
 	}
 
