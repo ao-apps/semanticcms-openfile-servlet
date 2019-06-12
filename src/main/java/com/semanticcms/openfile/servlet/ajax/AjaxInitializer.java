@@ -35,8 +35,7 @@ public class AjaxInitializer implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		HtmlRenderer htmlRenderer = HtmlRenderer.getInstance(event.getServletContext());
-		// TODO: Get version from MavenProperties, other places, too (even inside jsps)
-		htmlRenderer.addScript("jquery", "/webjars/jquery/3.4.1/jquery.min.js");
+		htmlRenderer.addScript("jquery", "/webjars/jquery/" + Maven.properties.getProperty("jquery.version") + "/jquery.min.js");
 		htmlRenderer.addHeadInclude(HEAD_INCLUDE);
 	}
 
