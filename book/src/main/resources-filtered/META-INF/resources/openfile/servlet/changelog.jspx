@@ -36,7 +36,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-31T01:27:36-0500"
-		dateModified="2019-06-12T23:01:53-0500"
+		dateModified="2019-06-19T09:48:11-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-openfile-servlet:pom.version}" />
@@ -55,7 +55,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 				<ul>
 					<li>Using managed dependencies:
 						<ol>
-							<li>This project uses transitive managed dependencies.</li>
+							<li>This project uses managed dependencies.</li>
 							<li>This project's managed dependencies may also be imported by other projects.</li>
 						</ol>
 					</li>
