@@ -28,6 +28,8 @@ import com.aoindustries.validation.ValidationException;
 import com.semanticcms.openfile.servlet.OpenFile;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,6 +52,8 @@ public class OpenFileServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	private static final Charset ENCODING = StandardCharsets.UTF_8;
+
 	public static final String SERVLET_PATH = "/semanticcms-openfile-servlet/ajax/open-file";
 
 	@Override
@@ -66,8 +70,11 @@ public class OpenFileServlet extends HttpServlet {
 			// Write output
 			response.resetBuffer();
 			response.setContentType("application/xml");
+			response.setCharacterEncoding(ENCODING.name());
 			PrintWriter out = response.getWriter();
-			out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>");
+			out.print("<?xml version=\"1.0\" encoding=\"");
+			out.print(ENCODING);
+			out.println("\" standalone=\"yes\" ?>");
 			out.println("<success>true</success>");
 		} catch(ValidationException e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
