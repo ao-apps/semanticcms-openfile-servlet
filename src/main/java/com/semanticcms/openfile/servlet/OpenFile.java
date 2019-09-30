@@ -26,7 +26,7 @@ import com.aoindustries.io.FileUtils;
 import com.aoindustries.lang.ProcessResult;
 import com.aoindustries.net.DomainName;
 import com.aoindustries.net.Path;
-import com.aoindustries.servlet.http.ServletUtil;
+import com.aoindustries.servlet.ServletUtil;
 import com.semanticcms.core.controller.Book;
 import com.semanticcms.core.controller.ResourceRefResolver;
 import com.semanticcms.core.controller.SemanticCMS;
