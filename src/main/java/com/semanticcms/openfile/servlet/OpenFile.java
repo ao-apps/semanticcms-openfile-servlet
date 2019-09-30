@@ -24,7 +24,7 @@ package com.semanticcms.openfile.servlet;
 
 import com.aoindustries.io.FileUtils;
 import com.aoindustries.lang.ProcessResult;
-import com.aoindustries.servlet.http.ServletUtil;
+import com.aoindustries.servlet.ServletUtil;
 import com.semanticcms.core.servlet.PageRefResolver;
 import java.io.IOException;
 import java.net.InetAddress;
