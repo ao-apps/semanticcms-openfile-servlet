@@ -301,33 +301,27 @@ final public class OpenFile {
 			// Start the process
 			final Process process = Runtime.getRuntime().exec(command);
 			// Result is watched in the background only
-			// Java 1.8: Lambda
-			new Thread(
-				new Runnable() {
-					@Override
-					public void run() {
-						try {
-							final ProcessResult result = ProcessResult.getProcessResult(process);
-							int exitVal = result.getExitVal();
-							if(exitVal != 0) {
-								logger.log(Level.SEVERE, "Non-zero exit status from \"{0}\": {1}", new Object[]{path, exitVal});
-							}
-							String stdErr = result.getStderr();
-							if(!stdErr.isEmpty()) {
-								logger.log(Level.SEVERE, "Standard error from \"{0}\":\n{1}", new Object[]{path, stdErr});
-							}
-							if(logger.isLoggable(Level.INFO)) {
-								String stdOut = result.getStdout();
-								if(!stdOut.isEmpty()) {
-									logger.log(Level.INFO, "Standard output from \"{0}\":\n{1}", new Object[]{path, stdOut});
-								}
-							}
-						} catch(IOException e) {
-							logger.log(Level.SEVERE, null, e);
+			new Thread(() -> {
+				try {
+					final ProcessResult result = ProcessResult.getProcessResult(process);
+					int exitVal = result.getExitVal();
+					if(exitVal != 0) {
+						logger.log(Level.SEVERE, "Non-zero exit status from \"{0}\": {1}", new Object[]{path, exitVal});
+					}
+					String stdErr = result.getStderr();
+					if(!stdErr.isEmpty()) {
+						logger.log(Level.SEVERE, "Standard error from \"{0}\":\n{1}", new Object[]{path, stdErr});
+					}
+					if(logger.isLoggable(Level.INFO)) {
+						String stdOut = result.getStdout();
+						if(!stdOut.isEmpty()) {
+							logger.log(Level.INFO, "Standard output from \"{0}\":\n{1}", new Object[]{path, stdOut});
 						}
 					}
+				} catch(IOException e) {
+					logger.log(Level.SEVERE, null, e);
 				}
-			).start();
+			}).start();
 		}
 	}
 
