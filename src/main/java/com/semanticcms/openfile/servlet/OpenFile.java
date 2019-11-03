@@ -95,6 +95,7 @@ final public class OpenFile {
 	/**
 	 * Additional file openers may be registered to the application context.
 	 */
+	@FunctionalInterface
 	public static interface FileOpener {
 		/**
 		 * Gets the command that will open the given file.
