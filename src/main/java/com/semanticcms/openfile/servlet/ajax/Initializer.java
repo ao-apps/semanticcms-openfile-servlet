@@ -1,6 +1,6 @@
 /*
  * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
- * Copyright (C) 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,8 +27,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-@WebListener("Registers the scripts and \"" + AjaxInitializer.HEAD_INCLUDE + "\" head include in SemanticCMS.")
-public class AjaxInitializer implements ServletContextListener {
+@WebListener("Registers the scripts and \"" + Initializer.HEAD_INCLUDE + "\" head include in SemanticCMS.")
+public class Initializer implements ServletContextListener {
 
 	static final String HEAD_INCLUDE = "/semanticcms-openfile-servlet/head.inc.jspx";
 

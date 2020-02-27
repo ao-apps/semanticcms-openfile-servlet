@@ -1,6 +1,6 @@
 /*
  * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -29,14 +29,17 @@ import com.semanticcms.core.servlet.PageRefResolver;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.SkipPageException;
@@ -47,7 +50,29 @@ final public class OpenFile {
 
 	private static final String ENABLE_INIT_PARAM = OpenFile.class.getName() + ".enabled";
 
-	private static final String FILE_OPENERS_REQUEST_ATTRIBUTE_NAME = OpenFile.class.getName()+".fileOpeners";
+	private static final String FILE_OPENERS_APPLICATION_ATTRIBUTE = OpenFile.class.getName() + ".fileOpeners";
+
+	@WebListener
+	public static class Initializer implements ServletContextListener {
+		@Override
+		public void contextInitialized(ServletContextEvent event) {
+			getFileOpeners(event.getServletContext());
+		}
+		@Override
+		public void contextDestroyed(ServletContextEvent event) {
+			// Do nothing
+		}
+	}
+
+	private static ConcurrentMap<String,FileOpener> getFileOpeners(ServletContext servletContext) {
+		@SuppressWarnings("unchecked")
+		ConcurrentMap<String,FileOpener> fileOpeners = (ConcurrentMap<String,FileOpener>)servletContext.getAttribute(FILE_OPENERS_APPLICATION_ATTRIBUTE);
+		if(fileOpeners == null) {
+			fileOpeners = new ConcurrentHashMap<>();
+			servletContext.setAttribute(FILE_OPENERS_APPLICATION_ATTRIBUTE, fileOpeners);
+		}
+		return fileOpeners;
+	}
 
 	/**
 	 * Checks if the given host address is allowed to open files on the server.
@@ -98,25 +123,16 @@ final public class OpenFile {
 		String[] getCommand(java.io.File resourceFile) throws IOException;
 	}
 
-	private static class FileOpenersLock {}
-	private static final FileOpenersLock fileOpenersLock = new FileOpenersLock();
-
 	/**
 	 * Registers a file opener.
 	 * 
 	 * @param  extensions  The simple extensions, in lowercase, not including the dot, such as "dia"
 	 */
 	public static void addFileOpener(ServletContext servletContext, FileOpener fileOpener, String ... extensions) {
-		synchronized(fileOpenersLock) {
-			@SuppressWarnings("unchecked")
-			Map<String,FileOpener> fileOpeners = (Map<String,FileOpener>)servletContext.getAttribute(FILE_OPENERS_REQUEST_ATTRIBUTE_NAME);
-			if(fileOpeners == null) {
-				fileOpeners = new HashMap<>();
-				servletContext.setAttribute(FILE_OPENERS_REQUEST_ATTRIBUTE_NAME, fileOpeners);
-			}
-			for(String extension : extensions) {
-				if(fileOpeners.containsKey(extension)) throw new IllegalStateException("File opener already registered: " + extension);
-				fileOpeners.put(extension, fileOpener);
+		ConcurrentMap<String,FileOpener> fileOpeners = getFileOpeners(servletContext);
+		for(String extension : extensions) {
+			if(fileOpeners.putIfAbsent(extension, fileOpener) != null) {
+				throw new IllegalStateException("File opener already registered: " + extension);
 			}
 		}
 	}
@@ -127,17 +143,9 @@ final public class OpenFile {
 	 * @param  extensions  The simple extensions, in lowercase, not including the dot, such as "dia"
 	 */
 	public static void removeFileOpener(ServletContext servletContext, String ... extensions) {
-		synchronized(fileOpenersLock) {
-			@SuppressWarnings("unchecked")
-			Map<String,FileOpener> fileOpeners = (Map<String,FileOpener>)servletContext.getAttribute(FILE_OPENERS_REQUEST_ATTRIBUTE_NAME);
-			if(fileOpeners != null) {
-				for(String extension : extensions) {
-					fileOpeners.remove(extension);
-				}
-				if(fileOpeners.isEmpty()) {
-					servletContext.removeAttribute(FILE_OPENERS_REQUEST_ATTRIBUTE_NAME);
-				}
-			}
+		ConcurrentMap<String,FileOpener> fileOpeners = getFileOpeners(servletContext);
+		for(String extension : extensions) {
+			fileOpeners.remove(extension);
 		}
 	}
 
@@ -167,16 +175,7 @@ final public class OpenFile {
 				// Open the file with the appropriate application based on extension
 				String extension = FileUtils.getExtension(resourceFile.getName()).toLowerCase(Locale.ROOT);
 				// Check registered file openers first
-				FileOpener fileOpener;
-				synchronized(fileOpenersLock) {
-					@SuppressWarnings("unchecked")
-					Map<String,FileOpener> fileOpeners = (Map<String,FileOpener>)servletContext.getAttribute(FILE_OPENERS_REQUEST_ATTRIBUTE_NAME);
-					if(fileOpeners != null) {
-						fileOpener = fileOpeners.get(extension);
-					} else {
-						fileOpener = null;
-					}
-				}
+				FileOpener fileOpener = getFileOpeners(servletContext).get(extension);
 				if(fileOpener != null) {
 					command = fileOpener.getCommand(resourceFile);
 				} else {
