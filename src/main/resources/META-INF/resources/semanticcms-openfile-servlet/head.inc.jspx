@@ -31,7 +31,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 	<jsp:directive.page language="java" pageEncoding="UTF-8" />
 	<jsp:directive.page session="false" />
 	<c:if test="${!core:isExporting()}">
-		<ao:script src="/semanticcms-openfile-servlet/scripts.js" />
+		<ao:script src="/semanticcms-openfile-servlet/semanticcms-openfile-servlet.js" />
 		<ao:script>
 			semanticcms_openfile_servlet.openFileUrl = <ao:out value="${ao:encodeURL(pageContext.request.contextPath.concat('/semanticcms-openfile-servlet/ajax/open-file'))}" />;
 		</ao:script>
