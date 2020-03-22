@@ -37,7 +37,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-31T01:27:36-0500"
-		dateModified="2020-03-07T06:01:29-0600"
+		dateModified="2020-03-22T06:01:23-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-openfile-servlet:pom.version}" />
@@ -61,6 +61,11 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 					</li>
 					<li>Using constants from new <code>ContentType</code> class.</li>
 					<li>Optimized ServletContext attribute initialization and concurrency.</li>
+					<li>
+						Folders and ZIP files are now opened in <code>/usr/bin/dolphin</code> instead of
+						<code>/usr/bin/konqueror</code>, as Konqueror continues to get neutered with
+						each release while Dolphin is being advanced.
+					</li>
 				</ul>
 			</changelog:release>
 		</c:if>

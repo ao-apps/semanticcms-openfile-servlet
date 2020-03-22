@@ -168,7 +168,7 @@ final public class OpenFile {
 					// TODO: What is good windows path?
 					//isWindows()
 					//	? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
-					"/usr/bin/konqueror",
+					"/usr/bin/dolphin",
 					resourceFile.getCanonicalPath()
 				};
 			} else {
@@ -264,7 +264,7 @@ final public class OpenFile {
 								};
 							} else {
 								command = new String[] {
-									"/usr/bin/konqueror",
+									"/usr/bin/dolphin",
 									resourceFile.getCanonicalPath()
 								};
 							}
