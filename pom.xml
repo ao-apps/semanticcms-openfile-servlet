@@ -46,7 +46,6 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 	<inceptionYear>2013</inceptionYear>
 
 	<scm>
-		<!-- Can't inherit due to multi-module -->
 		<connection>scm:git:git://github.com/aoindustries/semanticcms-openfile-servlet.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/semanticcms-openfile-servlet.git</developerConnection>
 		<url>https://github.com/aoindustries/semanticcms-openfile-servlet</url>
