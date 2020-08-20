@@ -37,7 +37,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-31T01:27:36-0500"
-		dateModified="2020-04-27T15:14:56-05:00"
+		dateModified="2020-08-19T22:39:32-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-openfile-servlet:pom.version}" />
@@ -52,7 +52,11 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
-			/>
+			>
+				<ul>
+					<li>Now URI-encoding dependency versions obtained at runtime.</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release

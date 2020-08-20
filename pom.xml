@@ -29,7 +29,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		<relativePath>../../parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.semanticcms</groupId><artifactId>semanticcms-openfile-servlet</artifactId><version>1.9.0-POST-SNAPSHOT</version>
+	<groupId>com.semanticcms</groupId><artifactId>semanticcms-openfile-servlet</artifactId><version>1.9.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -95,6 +95,11 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-lang</outputDirectory>
 										</artifactItem>
 										<artifactItem>
+											<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId>
+											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-net-types</outputDirectory>
+										</artifactItem>
+										<artifactItem>
 											<groupId>com.aoindustries</groupId><artifactId>ao-servlet-util</artifactId>
 											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-servlet-util</outputDirectory>
@@ -127,6 +132,10 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 								<offlineLink>
 									<url>https://aoindustries.com/ao-lang/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-lang</location>
+								</offlineLink>
+								<offlineLink>
+									<url>https://aoindustries.com/ao-net-types/apidocs/</url>
+									<location>${project.build.directory}/offlineLinks/com.aoindustries/ao-net-types</location>
 								</offlineLink>
 								<offlineLink>
 									<url>https://aoindustries.com/ao-servlet-util/apidocs/</url>
@@ -170,6 +179,9 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 				<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId><version>4.5.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
 			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId><version>1.2.1${POST-SNAPSHOT}</version>
+			</dependency>
+			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-servlet-util</artifactId><version>2.1.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
@@ -208,9 +220,6 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 			</dependency>
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-io-buffer</artifactId><version>3.3.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
-			</dependency>
-			<dependency>
-				<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId><version>1.2.1${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-servlet-filter</artifactId><version>2.2.0${POST-SNAPSHOT}</version>
@@ -263,6 +272,9 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 		<!-- Direct -->
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-servlet-util</artifactId>
