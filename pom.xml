@@ -69,7 +69,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 						<dependency>com.semanticcms:semanticcms-core-taglib</dependency>
 						<!-- Runtime Direct -->
 						<dependency>com.aoindustries:ao-servlet-firewall-webjars</dependency>
-						<dependency>org.webjars:jquery</dependency>
+						<dependency>org.webjars.npm:jquery</dependency>
 						<dependency>org.glassfish.web:jstl-impl</dependency>
 					</usedDependencies>
 				</configuration>
@@ -299,7 +299,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 				<groupId>com.aoindustries</groupId><artifactId>ao-servlet-firewall-webjars</artifactId><version>1.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
 			<dependency>
-				<groupId>org.webjars</groupId><artifactId>jquery</artifactId><version>3.5.1</version>
+				<groupId>org.webjars.npm</groupId><artifactId>jquery</artifactId><version>3.5.1</version>
 			</dependency>
 			<!-- javaee-web-api-bom: <groupId>org.glassfish.web</groupId><artifactId>jstl-impl</artifactId> -->
 			<!-- Runtime Transitive -->
@@ -369,7 +369,7 @@ along with semanticcms-openfile-servlet.  If not, see <http://www.gnu.org/licens
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.webjars</groupId><artifactId>jquery</artifactId>
+			<groupId>org.webjars.npm</groupId><artifactId>jquery</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
