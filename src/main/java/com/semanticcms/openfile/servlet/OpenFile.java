@@ -1,6 +1,6 @@
 /*
  * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -71,9 +71,9 @@ final public class OpenFile {
 		}
 	}
 
-	private static ConcurrentMap<String,FileOpener> getFileOpeners(ServletContext servletContext) {
+	private static ConcurrentMap<String, FileOpener> getFileOpeners(ServletContext servletContext) {
 		@SuppressWarnings("unchecked")
-		ConcurrentMap<String,FileOpener> fileOpeners = (ConcurrentMap<String,FileOpener>)servletContext.getAttribute(FILE_OPENERS_APPLICATION_ATTRIBUTE);
+		ConcurrentMap<String, FileOpener> fileOpeners = (ConcurrentMap<String, FileOpener>)servletContext.getAttribute(FILE_OPENERS_APPLICATION_ATTRIBUTE);
 		if(fileOpeners == null) {
 			fileOpeners = new ConcurrentHashMap<>();
 			servletContext.setAttribute(FILE_OPENERS_APPLICATION_ATTRIBUTE, fileOpeners);
@@ -136,7 +136,7 @@ final public class OpenFile {
 	 * @param  extensions  The simple extensions, in lowercase, not including the dot, such as "dia"
 	 */
 	public static void addFileOpener(ServletContext servletContext, FileOpener fileOpener, String ... extensions) {
-		ConcurrentMap<String,FileOpener> fileOpeners = getFileOpeners(servletContext);
+		ConcurrentMap<String, FileOpener> fileOpeners = getFileOpeners(servletContext);
 		for(String extension : extensions) {
 			if(fileOpeners.putIfAbsent(extension, fileOpener) != null) {
 				throw new IllegalStateException("File opener already registered: " + extension);
@@ -150,7 +150,7 @@ final public class OpenFile {
 	 * @param  extensions  The simple extensions, in lowercase, not including the dot, such as "dia"
 	 */
 	public static void removeFileOpener(ServletContext servletContext, String ... extensions) {
-		ConcurrentMap<String,FileOpener> fileOpeners = getFileOpeners(servletContext);
+		ConcurrentMap<String, FileOpener> fileOpeners = getFileOpeners(servletContext);
 		for(String extension : extensions) {
 			fileOpeners.remove(extension);
 		}
