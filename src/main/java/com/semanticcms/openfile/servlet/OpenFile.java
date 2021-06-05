@@ -22,11 +22,11 @@
  */
 package com.semanticcms.openfile.servlet;
 
-import com.aoindustries.io.FileUtils;
-import com.aoindustries.lang.ProcessResult;
-import com.aoindustries.net.DomainName;
-import com.aoindustries.net.Path;
-import com.aoindustries.servlet.ServletUtil;
+import com.aoapps.lang.ProcessResult;
+import com.aoapps.lang.io.FileUtils;
+import com.aoapps.net.DomainName;
+import com.aoapps.net.Path;
+import com.aoapps.servlet.ServletUtil;
 import com.semanticcms.core.controller.Book;
 import com.semanticcms.core.controller.ResourceRefResolver;
 import com.semanticcms.core.controller.SemanticCMS;
