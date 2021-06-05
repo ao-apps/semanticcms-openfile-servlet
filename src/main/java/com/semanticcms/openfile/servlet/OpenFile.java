@@ -22,9 +22,9 @@
  */
 package com.semanticcms.openfile.servlet;
 
-import com.aoindustries.io.FileUtils;
-import com.aoindustries.lang.ProcessResult;
-import com.aoindustries.servlet.ServletUtil;
+import com.aoapps.lang.ProcessResult;
+import com.aoapps.lang.io.FileUtils;
+import com.aoapps.servlet.ServletUtil;
 import com.semanticcms.core.servlet.PageRefResolver;
 import java.io.IOException;
 import java.net.InetAddress;
