@@ -24,6 +24,7 @@ package com.semanticcms.openfile.servlet;
 
 import com.aoapps.lang.ProcessResult;
 import com.aoapps.lang.io.FileUtils;
+import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.servlet.ServletUtil;
 import com.semanticcms.core.servlet.PageRefResolver;
 import java.io.IOException;
@@ -50,7 +51,8 @@ final public class OpenFile {
 
 	private static final String ENABLE_INIT_PARAM = OpenFile.class.getName() + ".enabled";
 
-	private static final String FILE_OPENERS_APPLICATION_ATTRIBUTE = OpenFile.class.getName() + ".fileOpeners";
+	private static final ScopeEE.Application.Attribute<ConcurrentMap<String, FileOpener>> FILE_OPENERS_APPLICATION_ATTRIBUTE =
+		ScopeEE.APPLICATION.attribute(OpenFile.class.getName() + ".fileOpeners");
 
 	@WebListener
 	public static class Initializer implements ServletContextListener {
@@ -65,13 +67,7 @@ final public class OpenFile {
 	}
 
 	private static ConcurrentMap<String, FileOpener> getFileOpeners(ServletContext servletContext) {
-		@SuppressWarnings("unchecked")
-		ConcurrentMap<String, FileOpener> fileOpeners = (ConcurrentMap<String, FileOpener>)servletContext.getAttribute(FILE_OPENERS_APPLICATION_ATTRIBUTE);
-		if(fileOpeners == null) {
-			fileOpeners = new ConcurrentHashMap<>();
-			servletContext.setAttribute(FILE_OPENERS_APPLICATION_ATTRIBUTE, fileOpeners);
-		}
-		return fileOpeners;
+		return FILE_OPENERS_APPLICATION_ATTRIBUTE.context(servletContext).computeIfAbsent(__ -> new ConcurrentHashMap<>());
 	}
 
 	/**
@@ -125,7 +121,7 @@ final public class OpenFile {
 
 	/**
 	 * Registers a file opener.
-	 * 
+	 *
 	 * @param  extensions  The simple extensions, in lowercase, not including the dot, such as "dia"
 	 */
 	public static void addFileOpener(ServletContext servletContext, FileOpener fileOpener, String ... extensions) {
@@ -139,7 +135,7 @@ final public class OpenFile {
 
 	/**
 	 * Removes file openers.
-	 * 
+	 *
 	 * @param  extensions  The simple extensions, in lowercase, not including the dot, such as "dia"
 	 */
 	public static void removeFileOpener(ServletContext servletContext, String ... extensions) {
