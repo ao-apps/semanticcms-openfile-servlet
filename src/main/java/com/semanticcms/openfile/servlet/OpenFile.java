@@ -52,7 +52,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.SkipPageException;
 
-final public class OpenFile {
+public final class OpenFile {
 
 	private static final Logger logger = Logger.getLogger(OpenFile.class.getName());
 
