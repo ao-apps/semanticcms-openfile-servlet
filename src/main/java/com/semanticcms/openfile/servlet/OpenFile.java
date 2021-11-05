@@ -52,7 +52,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.SkipPageException;
 
-public final class OpenFile {
+public abstract class OpenFile {
+
+	/** Make no instances. */
+	private OpenFile() {throw new AssertionError();}
 
 	private static final Logger logger = Logger.getLogger(OpenFile.class.getName());
 
@@ -319,11 +322,5 @@ public final class OpenFile {
 				}
 			}).start();
 		}
-	}
-
-	/**
-	 * Make no instances.
-	 */
-	private OpenFile() {
 	}
 }
