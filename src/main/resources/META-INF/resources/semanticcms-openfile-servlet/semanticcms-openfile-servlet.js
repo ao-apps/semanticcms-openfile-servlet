@@ -1,6 +1,6 @@
 /*
  * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
- * Copyright (C) 2013, 2014, 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2016, 2017, 2019, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -27,53 +27,53 @@
  */
 semanticcms_openfile_servlet = {
 
-	/*
-	 * The openFileUrl of the application.  This is set by JSP just after this
-	 * script is included.
-	 */
-	openFileUrl : "",
+  /*
+   * The openFileUrl of the application.  This is set by JSP just after this
+   * script is included.
+   */
+  openFileUrl : "",
 
-	/*
-	 * Handles error messages from Ajax calls.
-	 */
-	handleAjaxError : function(message, jqXHR, errorThrown) {
-		window.alert(
-			message + "\n"
-			+ "Status Code = " + jqXHR.status + "\n"
-			+ "Error Thrown = " + errorThrown
-		);
-	},
+  /*
+   * Handles error messages from Ajax calls.
+   */
+  handleAjaxError : function(message, jqXHR, errorThrown) {
+    window.alert(
+      message + "\n"
+      + "Status Code = " + jqXHR.status + "\n"
+      + "Error Thrown = " + errorThrown
+    );
+  },
 
-	/*
-	 * Opens a file from the server, passing-in the full path to the file.
-	 * This is to be used in a trusted environment only.
-	 */
-	openFile : function(domain, book, path) {
-		// window.alert("path="+path);
-		jQuery.ajax({
-			cache : false,
-			type : "POST", // POST because has side-effects
-			timeout : 60000,
-			url : semanticcms_openfile_servlet.openFileUrl,
-			data : {
-				domain : domain,
-				book : book,
-				path : path
-			},
-			dataType : "xml",
-			success : function(data, textStatus, jqXHR) {
-				// Do nothing, file is opened by the servlet container
-			},
-			error : function(jqXHR, textStatus, errorThrown) {
-				semanticcms_openfile_servlet.handleAjaxError(
-					"Unable to open file:\n"
-					+ "domain = " + domain + "\n"
-					+ "book = " + book + "\n"
-					+ "path = " + path,
-					jqXHR,
-					errorThrown
-				);
-			}
-		});
-	}
+  /*
+   * Opens a file from the server, passing-in the full path to the file.
+   * This is to be used in a trusted environment only.
+   */
+  openFile : function(domain, book, path) {
+    // window.alert("path="+path);
+    jQuery.ajax({
+      cache : false,
+      type : "POST", // POST because has side-effects
+      timeout : 60000,
+      url : semanticcms_openfile_servlet.openFileUrl,
+      data : {
+        domain : domain,
+        book : book,
+        path : path
+      },
+      dataType : "xml",
+      success : function(data, textStatus, jqXHR) {
+        // Do nothing, file is opened by the servlet container
+      },
+      error : function(jqXHR, textStatus, errorThrown) {
+        semanticcms_openfile_servlet.handleAjaxError(
+          "Unable to open file:\n"
+          + "domain = " + domain + "\n"
+          + "book = " + book + "\n"
+          + "path = " + path,
+          jqXHR,
+          errorThrown
+        );
+      }
+    });
+  }
 };
