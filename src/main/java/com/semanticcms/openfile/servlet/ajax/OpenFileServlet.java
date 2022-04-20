@@ -48,33 +48,33 @@ import javax.servlet.jsp.SkipPageException;
 @WebServlet(OpenFileServlet.SERVLET_PATH)
 public class OpenFileServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private static final Charset ENCODING = StandardCharsets.UTF_8;
+  private static final Charset ENCODING = StandardCharsets.UTF_8;
 
-	public static final String SERVLET_PATH = "/semanticcms-openfile-servlet/ajax/open-file";
+  public static final String SERVLET_PATH = "/semanticcms-openfile-servlet/ajax/open-file";
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			OpenFile.openFile(
-				getServletContext(),
-				request,
-				response,
-				request.getParameter("book"),
-				request.getParameter("path")
-			);
-			// Write output
-			response.resetBuffer();
-			response.setContentType(ContentType.XML);
-			response.setCharacterEncoding(ENCODING.name());
-			PrintWriter out = response.getWriter();
-			out.print("<?xml version=\"1.0\" encoding=\"");
-			out.print(ENCODING);
-			out.println("\" standalone=\"yes\" ?>");
-			out.println("<success>true</success>");
-		} catch(SkipPageException e) {
-			// Nothing to do
-		}
-	}
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    try {
+      OpenFile.openFile(
+        getServletContext(),
+        request,
+        response,
+        request.getParameter("book"),
+        request.getParameter("path")
+      );
+      // Write output
+      response.resetBuffer();
+      response.setContentType(ContentType.XML);
+      response.setCharacterEncoding(ENCODING.name());
+      PrintWriter out = response.getWriter();
+      out.print("<?xml version=\"1.0\" encoding=\"");
+      out.print(ENCODING);
+      out.println("\" standalone=\"yes\" ?>");
+      out.println("<success>true</success>");
+    } catch (SkipPageException e) {
+      // Nothing to do
+    }
+  }
 }
