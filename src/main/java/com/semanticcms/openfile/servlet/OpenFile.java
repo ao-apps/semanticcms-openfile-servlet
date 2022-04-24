@@ -65,7 +65,7 @@ public final class OpenFile {
   private static final String ENABLE_INIT_PARAM = OpenFile.class.getName() + ".enabled";
 
   private static final ScopeEE.Application.Attribute<ConcurrentMap<String, FileOpener>> FILE_OPENERS_APPLICATION_ATTRIBUTE =
-    ScopeEE.APPLICATION.attribute(OpenFile.class.getName() + ".fileOpeners");
+      ScopeEE.APPLICATION.attribute(OpenFile.class.getName() + ".fileOpeners");
 
   @WebListener
   public static class Initializer implements ServletContextListener {
@@ -73,6 +73,7 @@ public final class OpenFile {
     public void contextInitialized(ServletContextEvent event) {
       getFileOpeners(event.getServletContext());
     }
+
     @Override
     public void contextDestroyed(ServletContextEvent event) {
       // Do nothing
@@ -96,8 +97,8 @@ public final class OpenFile {
    */
   public static boolean isAllowed(ServletContext servletContext, ServletRequest request) {
     return
-      Boolean.parseBoolean(servletContext.getInitParameter(ENABLE_INIT_PARAM))
-      && isAllowedAddr(request.getRemoteAddr())
+        Boolean.parseBoolean(servletContext.getInitParameter(ENABLE_INIT_PARAM))
+            && isAllowedAddr(request.getRemoteAddr())
     ;
   }
 
@@ -105,8 +106,8 @@ public final class OpenFile {
     try {
       String hostname = InetAddress.getLocalHost().getCanonicalHostName();
       if (
-        //"francis.aoindustries.com".equals(hostname)
-        "freedom.aoindustries.com".equals(hostname)
+          //"francis.aoindustries.com".equals(hostname)
+          "freedom.aoindustries.com".equals(hostname)
       ) {
         return "/opt/jdk1.8.0-i686";
       }
@@ -162,12 +163,12 @@ public final class OpenFile {
 
   // TODO: Should this only allow open of published books?
   public static void openFile(
-    ServletContext servletContext,
-    HttpServletRequest request,
-    HttpServletResponse response,
-    DomainName domain,
-    Path book,
-    final Path path
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      DomainName domain,
+      Path book,
+      final Path path
   ) throws ServletException, IOException, SkipPageException {
     // Only allow from localhost and when open enabled
     if (!isAllowed(servletContext, request)) {
@@ -189,12 +190,12 @@ public final class OpenFile {
         throw new FileNotFoundException("Resource is not a local file: " + resourceRef);
       }
       if (resourceFile.isDirectory()) {
-        command = new String[] {
-          // TODO: What is good windows path?
-          //isWindows()
-          //  ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
-          "/usr/bin/dolphin",
-          resourceFile.getCanonicalPath()
+        command = new String[]{
+            // TODO: What is good windows path?
+            //isWindows()
+            //  ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
+            "/usr/bin/dolphin",
+            resourceFile.getCanonicalPath()
         };
       } else {
         // Open the file with the appropriate application based on extension
@@ -210,42 +211,42 @@ public final class OpenFile {
             case "jpg" :
             case "jpeg" :
             case "png" :
-              command = new String[] {
-                isWindows()
-                  ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
-                  : "/usr/bin/gwenview",
-                resourceFile.getCanonicalPath()
+              command = new String[]{
+                  isWindows()
+                      ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
+                      : "/usr/bin/gwenview",
+                  resourceFile.getCanonicalPath()
               };
               break;
             case "doc" :
             case "docx" :
             case "odt" :
-              command = new String[] {
-                isWindows()
-                  ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
-                  : "/usr/bin/libreoffice",
-                "--writer",
-                resourceFile.getCanonicalPath()
+              command = new String[]{
+                  isWindows()
+                      ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
+                      : "/usr/bin/libreoffice",
+                  "--writer",
+                  resourceFile.getCanonicalPath()
               };
               break;
             case "csv" :
             case "ods" :
             case "sxc" :
             case "xls" :
-              command = new String[] {
-                isWindows()
-                  ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\scalc.exe"
-                  : "/usr/bin/libreoffice",
-                "--calc",
-                resourceFile.getCanonicalPath()
+              command = new String[]{
+                  isWindows()
+                      ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\scalc.exe"
+                      : "/usr/bin/libreoffice",
+                  "--calc",
+                  resourceFile.getCanonicalPath()
               };
               break;
             case "pdf" :
-              command = new String[] {
-                isWindows()
-                  ? "C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe"
-                  : "/usr/bin/okular",
-                resourceFile.getCanonicalPath()
+              command = new String[]{
+                  isWindows()
+                      ? "C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe"
+                      : "/usr/bin/okular",
+                  resourceFile.getCanonicalPath()
               };
               break;
             case "c" :
@@ -258,49 +259,49 @@ public final class OpenFile {
             case "txt" :
             case "xml" :
               if (isWindows()) {
-                command = new String[] {
-                  "C:\\Program Files\\NetBeans 7.4\\bin\\netbeans64.exe",
-                  "--open",
-                  resourceFile.getCanonicalPath()
+                command = new String[]{
+                    "C:\\Program Files\\NetBeans 7.4\\bin\\netbeans64.exe",
+                    "--open",
+                    resourceFile.getCanonicalPath()
                 };
               } else {
-                command = new String[] {
-                  //"/usr/bin/kwrite",
-                  "/opt/netbeans/bin/netbeans",
-                  "--jdkhome",
-                  getJdkPath(),
-                  "--open",
-                  resourceFile.getCanonicalPath()
+                command = new String[]{
+                    //"/usr/bin/kwrite",
+                    "/opt/netbeans/bin/netbeans",
+                    "--jdkhome",
+                    getJdkPath(),
+                    "--open",
+                    resourceFile.getCanonicalPath()
                 };
               }
               break;
             case "dia" :
-              command = new String[] {
-                isWindows()
-                  ? "C:\\Program Files (x86)\\Dia\\bin\\diaw.exe"
-                  : "/usr/bin/dia",
-                resourceFile.getCanonicalPath()
+              command = new String[]{
+                  isWindows()
+                      ? "C:\\Program Files (x86)\\Dia\\bin\\diaw.exe"
+                      : "/usr/bin/dia",
+                  resourceFile.getCanonicalPath()
               };
               break;
             case "zip" :
               if (isWindows()) {
-                command = new String[] {
-                  resourceFile.getCanonicalPath()
+                command = new String[]{
+                    resourceFile.getCanonicalPath()
                 };
               } else {
-                command = new String[] {
-                  "/usr/bin/dolphin",
-                  resourceFile.getCanonicalPath()
+                command = new String[]{
+                    "/usr/bin/dolphin",
+                    resourceFile.getCanonicalPath()
                 };
               }
               break;
             case "mp3" :
             case "wma" :
-              command = new String[] {
-                isWindows()
-                  ? "C:\\Program Files\\VideoLAN\\VLC.exe"
-                  : "/usr/bin/vlc",
-                resourceFile.getCanonicalPath()
+              command = new String[]{
+                  isWindows()
+                      ? "C:\\Program Files\\VideoLAN\\VLC.exe"
+                      : "/usr/bin/vlc",
+                  resourceFile.getCanonicalPath()
               };
               break;
             default :

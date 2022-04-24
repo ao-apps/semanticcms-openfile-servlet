@@ -62,12 +62,12 @@ public class OpenFileServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     try {
       OpenFile.openFile(
-        getServletContext(),
-        request,
-        response,
-        DomainName.valueOf(request.getParameter("domain")),
-        Path.valueOf(request.getParameter("book")),
-        Path.valueOf(request.getParameter("path"))
+          getServletContext(),
+          request,
+          response,
+          DomainName.valueOf(request.getParameter("domain")),
+          Path.valueOf(request.getParameter("book")),
+          Path.valueOf(request.getParameter("path"))
       );
       // Write output
       response.resetBuffer();
