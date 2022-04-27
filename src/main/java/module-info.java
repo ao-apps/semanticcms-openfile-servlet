@@ -36,4 +36,4 @@ module com.semanticcms.openfile.servlet {
   requires taglibs.standard.spec; // <groupId>org.apache.taglibs</groupId><artifactId>taglibs-standard-spec</artifactId>
   // Java SE
   requires java.logging;
-}
+} // TODO: Avoiding rewrite-maven-plugin-4.22.2 truncation
