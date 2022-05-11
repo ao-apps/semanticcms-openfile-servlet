@@ -27,8 +27,8 @@ import com.aoapps.lang.ProcessResult;
 import com.aoapps.lang.io.FileUtils;
 import com.aoapps.net.DomainName;
 import com.aoapps.net.Path;
-import com.aoapps.servlet.attribute.ScopeEE;
 import com.aoapps.servlet.ServletUtil;
+import com.aoapps.servlet.attribute.ScopeEE;
 import com.semanticcms.core.controller.Book;
 import com.semanticcms.core.controller.ResourceRefResolver;
 import com.semanticcms.core.controller.SemanticCMS;
@@ -53,6 +53,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.SkipPageException;
 
+/**
+ * Opens files on the server-side.
+ */
 public final class OpenFile {
 
   /** Make no instances. */
@@ -67,7 +70,10 @@ public final class OpenFile {
   private static final ScopeEE.Application.Attribute<ConcurrentMap<String, FileOpener>> FILE_OPENERS_APPLICATION_ATTRIBUTE =
       ScopeEE.APPLICATION.attribute(OpenFile.class.getName() + ".fileOpeners");
 
-  @WebListener
+  /**
+   * Registers {@linkplain FileOpener file openers} during {@linkplain ServletContextListener application start-up}.
+   */
+  @WebListener("Registers file openers during application start-up.")
   public static class Initializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
@@ -81,7 +87,7 @@ public final class OpenFile {
   }
 
   private static ConcurrentMap<String, FileOpener> getFileOpeners(ServletContext servletContext) {
-    return FILE_OPENERS_APPLICATION_ATTRIBUTE.context(servletContext).computeIfAbsent(__ -> new ConcurrentHashMap<>());
+    return FILE_OPENERS_APPLICATION_ATTRIBUTE.context(servletContext).computeIfAbsent(name -> new ConcurrentHashMap<>());
   }
 
   /**
@@ -98,8 +104,7 @@ public final class OpenFile {
   public static boolean isAllowed(ServletContext servletContext, ServletRequest request) {
     return
         Boolean.parseBoolean(servletContext.getInitParameter(ENABLE_INIT_PARAM))
-            && isAllowedAddr(request.getRemoteAddr())
-    ;
+            && isAllowedAddr(request.getRemoteAddr());
   }
 
   private static String getJdkPath() {
@@ -112,7 +117,7 @@ public final class OpenFile {
         return "/opt/jdk1.8.0-i686";
       }
     } catch (UnknownHostException e) {
-      // Fall-through to default 64-bit
+      // fall-through to default 64-bit
     }
     return "/opt/jdk1.8.0";
   }
@@ -161,7 +166,12 @@ public final class OpenFile {
     }
   }
 
-  // TODO: Should this only allow open of published books?
+  /**
+   * Opens a file on the server-side.
+   * <p>
+   * TODO: Should this only allow open of published books?
+   * </p>
+   */
   public static void openFile(
       ServletContext servletContext,
       HttpServletRequest request,
@@ -207,57 +217,57 @@ public final class OpenFile {
         } else {
           // Use default behavior
           switch (extension) {
-            case "gif" :
-            case "jpg" :
-            case "jpeg" :
-            case "png" :
+            case "gif":
+            case "jpg":
+            case "jpeg":
+            case "png":
               command = new String[]{
                   isWindows()
-                      ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
-                      : "/usr/bin/gwenview",
+                  ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
+                  : "/usr/bin/gwenview",
                   resourceFile.getCanonicalPath()
               };
               break;
-            case "doc" :
-            case "docx" :
-            case "odt" :
+            case "doc":
+            case "docx":
+            case "odt":
               command = new String[]{
                   isWindows()
-                      ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
-                      : "/usr/bin/libreoffice",
+                  ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
+                  : "/usr/bin/libreoffice",
                   "--writer",
                   resourceFile.getCanonicalPath()
               };
               break;
-            case "csv" :
-            case "ods" :
-            case "sxc" :
-            case "xls" :
+            case "csv":
+            case "ods":
+            case "sxc":
+            case "xls":
               command = new String[]{
                   isWindows()
-                      ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\scalc.exe"
-                      : "/usr/bin/libreoffice",
+                  ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\scalc.exe"
+                  : "/usr/bin/libreoffice",
                   "--calc",
                   resourceFile.getCanonicalPath()
               };
               break;
-            case "pdf" :
+            case "pdf":
               command = new String[]{
                   isWindows()
-                      ? "C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe"
-                      : "/usr/bin/okular",
+                  ? "C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe"
+                  : "/usr/bin/okular",
                   resourceFile.getCanonicalPath()
               };
               break;
-            case "c" :
-            case "csh" :
-            case "h" :
-            case "java" :
-            case "jsp" :
-            case "jspx" :
-            case "sh" :
-            case "txt" :
-            case "xml" :
+            case "c":
+            case "csh":
+            case "h":
+            case "java":
+            case "jsp":
+            case "jspx":
+            case "sh":
+            case "txt":
+            case "xml": {
               if (isWindows()) {
                 command = new String[]{
                     "C:\\Program Files\\NetBeans 7.4\\bin\\netbeans64.exe",
@@ -275,15 +285,16 @@ public final class OpenFile {
                 };
               }
               break;
-            case "dia" :
+            }
+            case "dia":
               command = new String[]{
                   isWindows()
-                      ? "C:\\Program Files (x86)\\Dia\\bin\\diaw.exe"
-                      : "/usr/bin/dia",
+                  ? "C:\\Program Files (x86)\\Dia\\bin\\diaw.exe"
+                  : "/usr/bin/dia",
                   resourceFile.getCanonicalPath()
               };
               break;
-            case "zip" :
+            case "zip": {
               if (isWindows()) {
                 command = new String[]{
                     resourceFile.getCanonicalPath()
@@ -295,16 +306,17 @@ public final class OpenFile {
                 };
               }
               break;
-            case "mp3" :
-            case "wma" :
+            }
+            case "mp3":
+            case "wma":
               command = new String[]{
                   isWindows()
-                      ? "C:\\Program Files\\VideoLAN\\VLC.exe"
-                      : "/usr/bin/vlc",
+                  ? "C:\\Program Files\\VideoLAN\\VLC.exe"
+                  : "/usr/bin/vlc",
                   resourceFile.getCanonicalPath()
               };
               break;
-            default :
+            default:
               throw new IllegalArgumentException("Unsupprted file type by extension: " + extension);
           }
         }

@@ -43,11 +43,12 @@ import javax.servlet.jsp.SkipPageException;
  * Opens the file provided in the book and path parameters.  This file
  * must reside within this application and be of a supported type.
  * This is to be called by the JavaScript function openFile.
- *
+ * <pre>
  * Request parameters:
  *   domain  The domain of the book of the file to open
  *   book    The name of the book of the file to open
  *   path    The book-relative path of the file to open
+ * </pre>
  */
 @WebServlet(OpenFileServlet.SERVLET_PATH)
 public class OpenFileServlet extends HttpServlet {
