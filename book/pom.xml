@@ -36,15 +36,15 @@ along with semanticcms-openfile-servlet.  If not, see <https://www.gnu.org/licen
     <module.name>com.semanticcms.openfile.servlet.book</module.name>
     <!-- These values are copied from the project being documented -->
     <documented.artifactId>semanticcms-openfile-servlet</documented.artifactId>
-    <documented.name>SemanticCMS OpenFile Servlet²</documented.name>
+    <documented.name>SemanticCMS OpenFile Servlet</documented.name>
     <documented.description>SemanticCMS desktop integration mode for local content creation in a Servlet environment.</documented.description>
 
     <description.html><![CDATA[Documentation for <a target="${javadoc.target}" href="${project.url}">${documented.name}</a> in <a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
   </properties>
 
-  <name>SemanticCMS OpenFile Servlet² Book</name>
+  <name>SemanticCMS OpenFile Servlet Book</name>
   <url>https://semanticcms.com/openfile/servlet/</url>
-  <description>Documentation for SemanticCMS OpenFile Servlet² in SemanticCMS format.</description>
+  <description>Documentation for SemanticCMS OpenFile Servlet in SemanticCMS format.</description>
   <inceptionYear>2013</inceptionYear>
 
   <licenses>

@@ -46,7 +46,7 @@ along with semanticcms-openfile-servlet.  If not, see <https://www.gnu.org/licen
     <sonar.coverage.exclusions>**.*</sonar.coverage.exclusions>
   </properties>
 
-  <name>SemanticCMS OpenFile Servlet²</name>
+  <name>SemanticCMS OpenFile Servlet</name>
   <url>https://semanticcms.com/openfile/servlet/</url>
   <description>SemanticCMS desktop integration mode for local content creation in a Servlet environment.</description>
   <inceptionYear>2013</inceptionYear>
