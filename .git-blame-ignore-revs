@@ -9,13 +9,17 @@
 # $ git config blame.ignoreRevsFile .git-blame-ignore-revs
 
 # Significant manual code formatting clean-up…
+f7db158cb34ea935a78bbbc71346c98d7768b827
 d34e1d5c3250206c9c1c778d7783892f62abecb8
 
 # Created AnyContent interface and AnyDocument base implementation
+4f013cd260410b917d1b71a77865792a57682310
 a9499f38c84ca1eb68743d364658c2b8c6495768
 
 # Performed automatic source code clean-up with rewrite-maven-plugin
+06ea2f96f48402360166a0808220746d797080b4
 b0539d8673041ec7d03a4db09d9991b53d2dae5a
 
 # Performed manual checkstyle clean-up
+a194779a195da767cb86d361ef3de36b0521cd6f
 8be87fdb79ac32fa0d438055931c5c49f66a593d
