@@ -23,7 +23,7 @@
 * [Project Home](https://semanticcms.com/openfile/servlet/)
 * [Changelog](https://semanticcms.com/openfile/servlet/changelog)
 * [API Docs](https://semanticcms.com/openfile/servlet/apidocs/)
-* [Maven Central Repository](https://search.maven.org/artifact/com.semanticcms/semanticcms-openfile-servlet)
+* [Maven Central Repository](https://central.sonatype.com/search?namespace=com.semanticcms&q=a%3Asemanticcms-openfile-servlet)
 * [GitHub](https://github.com/ao-apps/semanticcms-openfile-servlet)
 
 ## Contact Us
