@@ -29,7 +29,6 @@ def upstreamProjects = [
 
   // Direct
   '../../oss/lang', // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
-  '../../oss/net-types', // <groupId>com.aoapps</groupId><artifactId>ao-net-types</artifactId>
   '../../oss/servlet-util', // <groupId>com.aoapps</groupId><artifactId>ao-servlet-util</artifactId>
   '../../oss/taglib', // <groupId>com.aoapps</groupId><artifactId>ao-taglib</artifactId>
   // No Jenkins: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId>
@@ -40,7 +39,6 @@ def upstreamProjects = [
   // No Jenkins: <groupId>org.apache.taglibs</groupId><artifactId>taglibs-standard-spec</artifactId>
 
   // Runtime Direct
-  // No Jenkins: <groupId>org.webjars.npm</groupId><artifactId>jquery</artifactId>
   // No Jenkins: <groupId>org.apache.taglibs</groupId><artifactId>taglibs-standard-impl</artifactId>
 
   // BOM

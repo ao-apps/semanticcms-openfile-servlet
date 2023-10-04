@@ -1,6 +1,6 @@
 /*
  * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
- * Copyright (C) 2013, 2014, 2016, 2017, 2019, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2016, 2017, 2019, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -36,10 +36,9 @@ semanticcms_openfile_servlet = {
   /*
    * Handles error messages from Ajax calls.
    */
-  handleAjaxError : function(message, jqXHR, errorThrown) {
+  handleAjaxError : function(message, errorThrown) {
     window.alert(
       message + "\n"
-      + "Status Code = " + jqXHR.status + "\n"
       + "Error Thrown = " + errorThrown
     );
   },
@@ -48,30 +47,40 @@ semanticcms_openfile_servlet = {
    * Opens a file from the server, passing-in the full path to the file.
    * This is to be used in a trusted environment only.
    */
-  openFile : function(book, path) {
-    // window.alert("path="+path);
-    jQuery.ajax({
-      cache : false,
-      type : "POST", // POST because has side-effects
-      timeout : 60000,
-      url : semanticcms_openfile_servlet.openFileUrl,
-      data : {
-        book : book,
-        path : path
-      },
-      dataType : "xml",
-      success : function(data, textStatus, jqXHR) {
+  openFile : async function(book, path) {
+    // See https://saturncloud.io/blog/how-to-make-an-ajax-call-without-jquery/
+    // See https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+    // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+    // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+    // See https://developer.mozilla.org/en-US/docs/Web/API/fetch
+    // See https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+    // See https://developer.mozilla.org/en-US/docs/Web/API/Response
+    try {
+      // window.alert("path="+path);
+      const response = await fetch(semanticcms_openfile_servlet.openFileUrl, {
+        method : "POST", // POST because has side-effects
+        body : new URLSearchParams({
+          book : book,
+          path : path
+        }),
+        mode : "same-origin",
+        cache : "no-store",
+        redirect : "error"
+      });
+      if (response.ok) {
+        const result = await response.text();
+        console.debug("result = " + result);
         // Do nothing, file is opened by the servlet container
-      },
-      error : function(jqXHR, textStatus, errorThrown) {
-        semanticcms_openfile_servlet.handleAjaxError(
-          "Unable to open file:\n"
-          + "book = " + book + "\n"
-          + "path = " + path,
-          jqXHR,
-          errorThrown
-        );
+      } else {
+        throw new Error("Request failed: " + response.status + " " + response.statusText);
       }
-    });
+    } catch (errorThrown) {
+      semanticcms_openfile_servlet.handleAjaxError(
+        "Unable to open file:\n"
+        + "book = " + book + "\n"
+        + "path = " + path,
+        errorThrown
+      );
+    }
   }
 };
