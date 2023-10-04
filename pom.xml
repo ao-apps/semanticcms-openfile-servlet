@@ -386,26 +386,7 @@ along with semanticcms-openfile-servlet.  If not, see <https://www.gnu.org/licen
         <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-servlet</artifactId><version>2.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
       </dependency>
       <!-- Runtime Direct -->
-      <dependency>
-        <groupId>com.aoapps</groupId><artifactId>ao-servlet-firewall-webjars</artifactId><version>0.1.0${POST-SNAPSHOT}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.webjars.npm</groupId><artifactId>jquery</artifactId><version>3.7.1</version>
-      </dependency>
       <!-- javaee-web-api-bom: <groupId>org.apache.taglibs</groupId><artifactId>taglibs-standard-impl</artifactId> -->
-      <!-- Runtime Transitive -->
-      <dependency>
-        <groupId>com.aoapps</groupId><artifactId>ao-net-path-space</artifactId><version>0.1.0${POST-SNAPSHOT}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.aoapps</groupId><artifactId>ao-servlet-firewall-api</artifactId><version>0.1.0${POST-SNAPSHOT}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.aoapps</groupId><artifactId>ao-servlet-firewall-path-space</artifactId><version>0.1.1${POST-SNAPSHOT}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.aoapps</groupId><artifactId>ao-servlet-firewall-rules</artifactId><version>0.2.0${POST-SNAPSHOT}</version>
-      </dependency>
       <!-- Imports -->
       <dependency>
         <groupId>com.aoapps</groupId><artifactId>javaee-web-api-bom</artifactId><version>7.0.1-POST-SNAPSHOT</version>
@@ -454,15 +435,6 @@ along with semanticcms-openfile-servlet.  If not, see <https://www.gnu.org/licen
       <groupId>org.apache.taglibs</groupId><artifactId>taglibs-standard-spec</artifactId>
     </dependency>
     <!-- Runtime Direct -->
-    <dependency>
-      <!-- Open servlet firewall for /webjars/*** -->
-      <groupId>com.aoapps</groupId><artifactId>ao-servlet-firewall-webjars</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.webjars.npm</groupId><artifactId>jquery</artifactId>
-      <scope>runtime</scope>
-    </dependency>
     <dependency>
       <groupId>org.apache.taglibs</groupId><artifactId>taglibs-standard-impl</artifactId>
       <scope>runtime</scope>

@@ -1,6 +1,6 @@
 /*
  * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
- * Copyright (C) 2013, 2014, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2016, 2017, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -72,13 +72,10 @@ public class OpenFileServlet extends HttpServlet {
       );
       // Write output
       response.resetBuffer();
-      response.setContentType(ContentType.XML);
+      response.setContentType(ContentType.TEXT);
       response.setCharacterEncoding(ENCODING.name());
       PrintWriter out = response.getWriter();
-      out.print("<?xml version=\"1.0\" encoding=\"");
-      out.print(ENCODING);
-      out.println("\" standalone=\"yes\" ?>");
-      out.println("<success>true</success>");
+      out.println("Success");
     } catch (ValidationException e) {
       response.sendError(HttpServletResponse.SC_BAD_REQUEST);
     } catch (SkipPageException e) {
