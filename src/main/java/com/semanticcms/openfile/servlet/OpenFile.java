@@ -1,6 +1,6 @@
 /*
  * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -105,21 +105,6 @@ public final class OpenFile {
     return
         Boolean.parseBoolean(servletContext.getInitParameter(ENABLE_INIT_PARAM))
             && isAllowedAddr(request.getRemoteAddr());
-  }
-
-  private static String getJdkPath() {
-    try {
-      String hostname = InetAddress.getLocalHost().getCanonicalHostName();
-      if (
-          //"francis.aoindustries.com".equals(hostname)
-          "freedom.aoindustries.com".equals(hostname)
-      ) {
-        return "/opt/jdk1.8.0-i686";
-      }
-    } catch (UnknownHostException e) {
-      // fall-through to default 64-bit
-    }
-    return "/opt/jdk1.8.0";
   }
 
   public static boolean isWindows() {
@@ -278,8 +263,6 @@ public final class OpenFile {
                 command = new String[]{
                     //"/usr/bin/kwrite",
                     "/opt/netbeans/bin/netbeans",
-                    "--jdkhome",
-                    getJdkPath(),
                     "--open",
                     resourceFile.getCanonicalPath()
                 };
