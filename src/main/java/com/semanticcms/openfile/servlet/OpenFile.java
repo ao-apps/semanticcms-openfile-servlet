@@ -1,6 +1,6 @@
 /*
  * semanticcms-openfile-servlet - SemanticCMS desktop integration mode for local content creation in a Servlet environment.
- * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -100,6 +100,10 @@ public final class OpenFile {
             && isAllowedAddr(request.getRemoteAddr());
   }
 
+  /**
+   * Checks if the current Java runtime is Windows via {@linkplain System#getProperty(java.lang.String) system property}
+   * {@code "os.name"}.
+   */
   public static boolean isWindows() {
     String osName = System.getProperty("os.name");
     return osName != null && osName.toLowerCase(Locale.ROOT).contains("windows");
