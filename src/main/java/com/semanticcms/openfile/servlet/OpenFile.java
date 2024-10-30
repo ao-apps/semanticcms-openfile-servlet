@@ -233,23 +233,24 @@ public final class OpenFile {
             case "jspx":
             case "sh":
             case "txt":
-            case "xml": {
-              if (isWindows()) {
-                command = new String[]{
-                    "C:\\Program Files\\NetBeans 7.4\\bin\\netbeans64.exe",
-                    "--open",
-                    resourceFile.getCanonicalPath()
-                };
-              } else {
-                command = new String[]{
-                    //"/usr/bin/kwrite",
-                    "/opt/netbeans/bin/netbeans",
-                    "--open",
-                    resourceFile.getCanonicalPath()
-                };
+            case "xml":
+              {
+                if (isWindows()) {
+                  command = new String[]{
+                      "C:\\Program Files\\NetBeans 7.4\\bin\\netbeans64.exe",
+                      "--open",
+                      resourceFile.getCanonicalPath()
+                  };
+                } else {
+                  command = new String[]{
+                      //"/usr/bin/kwrite",
+                      "/opt/netbeans/bin/netbeans",
+                      "--open",
+                      resourceFile.getCanonicalPath()
+                  };
+                }
+                break;
               }
-              break;
-            }
             case "dia":
               command = new String[]{
                   isWindows()
@@ -258,19 +259,20 @@ public final class OpenFile {
                   resourceFile.getCanonicalPath()
               };
               break;
-            case "zip": {
-              if (isWindows()) {
-                command = new String[]{
-                    resourceFile.getCanonicalPath()
-                };
-              } else {
-                command = new String[]{
-                    "/usr/bin/dolphin",
-                    resourceFile.getCanonicalPath()
-                };
+            case "zip":
+              {
+                if (isWindows()) {
+                  command = new String[]{
+                      resourceFile.getCanonicalPath()
+                  };
+                } else {
+                  command = new String[]{
+                      "/usr/bin/dolphin",
+                      resourceFile.getCanonicalPath()
+                  };
+                }
+                break;
               }
-              break;
-            }
             case "mp3":
             case "wma":
               command = new String[]{
