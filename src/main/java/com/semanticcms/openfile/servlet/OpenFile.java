@@ -125,7 +125,7 @@ public final class OpenFile {
    *
    * @param  extensions  The simple extensions, in lowercase, not including the dot, such as "dia"
    */
-  public static void addFileOpener(ServletContext servletContext, FileOpener fileOpener, String ... extensions) {
+  public static void addFileOpener(ServletContext servletContext, FileOpener fileOpener, String... extensions) {
     ConcurrentMap<String, FileOpener> fileOpeners = getFileOpeners(servletContext);
     for (String extension : extensions) {
       if (fileOpeners.putIfAbsent(extension, fileOpener) != null) {
@@ -139,7 +139,7 @@ public final class OpenFile {
    *
    * @param  extensions  The simple extensions, in lowercase, not including the dot, such as "dia"
    */
-  public static void removeFileOpener(ServletContext servletContext, String ... extensions) {
+  public static void removeFileOpener(ServletContext servletContext, String... extensions) {
     ConcurrentMap<String, FileOpener> fileOpeners = getFileOpeners(servletContext);
     for (String extension : extensions) {
       fileOpeners.remove(extension);
@@ -166,8 +166,8 @@ public final class OpenFile {
       if (resourceFile.isDirectory()) {
         command = new String[]{
             // TODO: What is good windows path?
-            //isWindows()
-            //  ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
+            // isWindows()
+            //   ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
             "/usr/bin/dolphin",
             resourceFile.getCanonicalPath()
         };
@@ -241,7 +241,7 @@ public final class OpenFile {
                   };
                 } else {
                   command = new String[]{
-                      //"/usr/bin/kwrite",
+                      // "/usr/bin/kwrite",
                       "/opt/netbeans/bin/netbeans",
                       "--open",
                       resourceFile.getCanonicalPath()
