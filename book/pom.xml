@@ -29,12 +29,12 @@ along with semanticcms-openfile-servlet.  If not, see <https://www.gnu.org/licen
     <relativePath>../../../parent/pom.xml</relativePath>
   </parent>
 
-  <groupId>com.semanticcms</groupId><artifactId>semanticcms-openfile-servlet-book</artifactId><version>1.22.0</version>
+  <groupId>com.semanticcms</groupId><artifactId>semanticcms-openfile-servlet-book</artifactId><version>1.22.0-POST-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <properties>
     <!-- Must be set to ${git.commit.time} for snapshots or ISO 8601 timestamp for releases. -->
-    <project.build.outputTimestamp>2026-02-03T04:47:44Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
     <module.name>com.semanticcms.openfile.servlet.book</module.name>
     <subproject.subpath>book/</subproject.subpath>
     <!-- These values are copied from the project being documented -->
@@ -82,7 +82,7 @@ along with semanticcms-openfile-servlet.  If not, see <https://www.gnu.org/licen
     <connection>scm:git:git://github.com/ao-apps/semanticcms-openfile-servlet.git</connection>
     <developerConnection>scm:git:git@github.com:ao-apps/semanticcms-openfile-servlet.git</developerConnection>
     <url>https://github.com/ao-apps/semanticcms-openfile-servlet</url>
-    <tag>semanticcms-openfile-servlet-book-1.22.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
