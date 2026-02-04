@@ -37,7 +37,7 @@ along with semanticcms-openfile-servlet.  If not, see <https://www.gnu.org/licen
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-31T01:27:36-05:00"
-    dateModified="2025-07-02T23:05:45Z"
+    dateModified="2025-12-19T01:44:28Z"
   >
     <c:set var="latestRelease" value="1.10.1" />
     <c:if test="${
@@ -55,6 +55,19 @@ along with semanticcms-openfile-servlet.  If not, see <https://www.gnu.org/licen
         <ul>
           <li>Removed dependency on jQuery to improve mobile browser response.</li>
           <li>NetBeans 19 requires JDK 11 or newer. Using system default JDK to open NetBeans instead of JDK 1.8.0.</li>
+          <li>
+            <p>
+              Added support for <code>*.fods</code> and <code>*.fodt</code> files, opening in
+              <ao:a href="https://www.libreoffice.org/">LibreOffice</ao:a>.  For projects versioning spreadsheets in Git
+              repositories, it is preferred to use store uncompressed XML representation.  This allows meaningful diffs
+              between versions.
+            </p>
+            See also:
+            <ul>
+              <li><ao:a href="https://en.wikipedia.org/wiki/OpenDocument_technical_specification">OpenDocument technical specification - Wikipedia</ao:a></li>
+              <li><ao:a href="https://docs.fileformat.com/spreadsheet/fods/">FODS - OpenDocument XML Spreadsheet File Format</ao:a></li>
+            </ul>
+          </li>
         </ul>
       </changelog:release>
     </c:if>

@@ -194,6 +194,7 @@ public final class OpenFile {
               break;
             case "doc":
             case "docx":
+            case "fodt":
             case "odt":
               command = new String[]{
                   isWindows()
@@ -204,6 +205,7 @@ public final class OpenFile {
               };
               break;
             case "csv":
+            case "fods":
             case "ods":
             case "sxc":
             case "xls":
