@@ -164,7 +164,7 @@ public final class OpenFile {
       final String[] command;
       java.io.File resourceFile = PageRefResolver.getPageRef(servletContext, request, book, path).getResourceFile(true, true);
       if (resourceFile.isDirectory()) {
-        command = new String[]{
+        command = new String[] {
             // TODO: What is good windows path?
             // isWindows()
             //   ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
@@ -185,7 +185,7 @@ public final class OpenFile {
             case "jpg":
             case "jpeg":
             case "png":
-              command = new String[]{
+              command = new String[] {
                   isWindows()
                   ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
                     : "/usr/bin/gwenview",
@@ -195,7 +195,7 @@ public final class OpenFile {
             case "doc":
             case "docx":
             case "odt":
-              command = new String[]{
+              command = new String[] {
                   isWindows()
                   ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\swriter.exe"
                     : "/usr/bin/libreoffice",
@@ -207,7 +207,7 @@ public final class OpenFile {
             case "ods":
             case "sxc":
             case "xls":
-              command = new String[]{
+              command = new String[] {
                   isWindows()
                   ? "C:\\Program Files (x86)\\OpenOffice 4\\program\\scalc.exe"
                     : "/usr/bin/libreoffice",
@@ -216,7 +216,7 @@ public final class OpenFile {
               };
               break;
             case "pdf":
-              command = new String[]{
+              command = new String[] {
                   isWindows()
                   ? "C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe"
                     : "/usr/bin/okular",
@@ -234,13 +234,13 @@ public final class OpenFile {
             case "xml":
               {
                 if (isWindows()) {
-                  command = new String[]{
+                  command = new String[] {
                       "C:\\Program Files\\NetBeans 7.4\\bin\\netbeans64.exe",
                       "--open",
                       resourceFile.getCanonicalPath()
                   };
                 } else {
-                  command = new String[]{
+                  command = new String[] {
                       // "/usr/bin/kwrite",
                       "/opt/netbeans/bin/netbeans",
                       "--open",
@@ -250,7 +250,7 @@ public final class OpenFile {
                 break;
               }
             case "dia":
-              command = new String[]{
+              command = new String[] {
                   isWindows()
                   ? "C:\\Program Files (x86)\\Dia\\bin\\diaw.exe"
                     : "/usr/bin/dia",
@@ -260,11 +260,11 @@ public final class OpenFile {
             case "zip":
               {
                 if (isWindows()) {
-                  command = new String[]{
+                  command = new String[] {
                       resourceFile.getCanonicalPath()
                   };
                 } else {
-                  command = new String[]{
+                  command = new String[] {
                       "/usr/bin/dolphin",
                       resourceFile.getCanonicalPath()
                   };
@@ -273,7 +273,7 @@ public final class OpenFile {
               }
             case "mp3":
             case "wma":
-              command = new String[]{
+              command = new String[] {
                   isWindows()
                   ? "C:\\Program Files\\VideoLAN\\VLC.exe"
                     : "/usr/bin/vlc",
@@ -293,16 +293,16 @@ public final class OpenFile {
           final ProcessResult result = ProcessResult.getProcessResult(process);
           int exitVal = result.getExitVal();
           if (exitVal != 0) {
-            logger.log(Level.SEVERE, "Non-zero exit status from \"{0}\": {1}", new Object[]{path, exitVal});
+            logger.log(Level.SEVERE, "Non-zero exit status from \"{0}\": {1}", new Object[] {path, exitVal});
           }
           String stdErr = result.getStderr();
           if (!stdErr.isEmpty()) {
-            logger.log(Level.SEVERE, "Standard error from \"{0}\":\n{1}", new Object[]{path, stdErr});
+            logger.log(Level.SEVERE, "Standard error from \"{0}\":\n{1}", new Object[] {path, stdErr});
           }
           if (logger.isLoggable(Level.INFO)) {
             String stdOut = result.getStdout();
             if (!stdOut.isEmpty()) {
-              logger.log(Level.INFO, "Standard output from \"{0}\":\n{1}", new Object[]{path, stdOut});
+              logger.log(Level.INFO, "Standard output from \"{0}\":\n{1}", new Object[] {path, stdOut});
             }
           }
         } catch (IOException e) {
