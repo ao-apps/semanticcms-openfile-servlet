@@ -306,7 +306,7 @@ public final class OpenFile {
             }
           }
         } catch (IOException e) {
-          logger.log(Level.SEVERE, null, e);
+          logger.log(Level.SEVERE, "TODO: message here", e);
         }
       }).start();
     }
